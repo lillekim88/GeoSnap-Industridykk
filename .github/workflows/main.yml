@@ -1,0 +1,25 @@
+name: Android Debug APK
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+jobs:
+  build-debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+      - name: Assemble Debug APK
+        run: ./gradlew :app:assembleDebug
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: GeoSnapIndustridykk-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
