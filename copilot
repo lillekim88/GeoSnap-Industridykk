@@ -1,0 +1,2 @@
+- name: GitHub Copilot CLI
+  uses: austenstone/copilot-cli@v1.0
