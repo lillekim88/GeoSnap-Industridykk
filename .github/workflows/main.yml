@@ -11,6 +11,9 @@ jobs:
   Build-Debug-APK:
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: read
+    
     env:
       JAVA_TOOL_OPTIONS: "-Xmx2g"
     
