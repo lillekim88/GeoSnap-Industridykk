@@ -3,4 +3,5 @@
     <color name="md_orange">#FF6A00</color>
     <color name="bg_dark">#121212</color>
     <color name="bg_light">#FFFFFF</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
 </resources>
