@@ -1,0 +1,42 @@
+
+org.gradle.jvmargs=-Xmx4g -Dfile.encoding=UTF-8
+android.useAndroidX=true
+android.enableJetifier=true
+kotlin.code.style=official
+
+# GeoSnap Industridykk — Android v0.1.7
+
+**Hva er nytt**
+- Aggressiv "live" geokoding (HUD ~0,6 s; adresse/sted oppdateres løpende når online)
+- Valgbar plassering av HUD/overlegg (tannhjul → *Plassering…*)
+- Checkbokser for detaljer (tannhjul → *Velg detaljer…*)
+- Lagring rett til Galleri (Pictures/GeoSnap) med overlegg + EXIF
+- Adaptive app-ikon (@mipmap/ic_launcher)
+- Workflow for **Debug** og **Release (signert)** APK (GitHub Actions)
+
+## Rask bruk (GitHub Actions)
+1. Last opp denne mappen til et GitHub-repo (ikke ZIP som én fil; bruk innholdet).
+2. Gå til **Actions → Android APK Builder → Run workflow**.
+3. Velg `build_type = debug` for rask test **eller** `release` (krever secrets).
+4. Etter grønt ✔ → nederst på kjøringen: **Artifacts** → last ned APK.
+
+### Release-secrets (kun én gang)
+- `KEYSTORE_BASE64` (base64 av keystore)
+- `KEYSTORE_PASSWORD`
+- `KEY_ALIAS`
+- `KEY_PASSWORD`
+
+## Lokal testing (Android Studio)
+- JDK 17, SDK 34. Kjør **Run ▶** på enheten. Tillat **Kamera** + **Posisjon**.
+
+## Innstillinger i app
+- Tannhjul øverst til høyre → *Plassering…* / *Velg detaljer…* / *Live-modus (aggressiv)*.
+
+
+pluginManagement { repositories { gradlePluginPortal(); google(); mavenCentral() } }
+dependencyResolutionManagement { repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS); repositories { google(); mavenCentral() } }
+rootProject.name='GeoSnapIndustridykk'
+include(':app')
+
+
+plugins { id 'com.android.application' version '8.5.2' apply false; id 'org.jetbrains.kotlin.android' version '1.9.24' apply false }
