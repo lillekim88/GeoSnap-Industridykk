@@ -2,11 +2,16 @@
 package com.geosnap.industridykk
 
 import kotlin.math.*
+import java.util.Locale
 
 data class UTM(val zone: Int, val band: Char, val easting: Double, val northing: Double) {
     override fun toString(): String {
         fun fmt(x: Double) = String.format(Locale.US, "%,.0f", x).replace(",", " ")
         return String.format(Locale.US, "%d%s %s %s", zone, band, fmt(easting), fmt(northing))
+    }
+
+    companion object {
+        fun fromLatLon(lat: Double, lon: Double) = UTMConverter.fromLatLon(lat, lon)
     }
 }
 
@@ -43,8 +48,6 @@ object UTMConverter {
         return bands[idx]
     }
 }
-
-fun UTM.Companion.fromLatLon(lat: Double, lon: Double) = UTMConverter.fromLatLon(lat, lon)
 
 object Formatters {
     fun cardinalFrom(bearingDeg: Float): String {
